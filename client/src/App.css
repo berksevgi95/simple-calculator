@@ -12,7 +12,8 @@
   justify-content : space-between;
   display: flex;
   align-items : center;
-  padding: 20px
+  padding: 20px;
+  padding-bottom: 0px;
 }
 
 .content {
