@@ -1,0 +1,58 @@
+.disabled {
+  position: absolute;
+  top : 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.746);
+  z-index: 999;
+}
+
+.header {
+  justify-content : space-between;
+  display: flex;
+  align-items : center;
+  padding: 20px
+}
+
+.content {
+  position: relative;
+  padding: 20px;
+}
+
+.connect-button {
+  justify-content: space-between;
+  display: flex;
+  align-items : center;
+}
+
+.connect-button span {
+  margin-right: 10px;
+}
+
+.mb {
+  margin-bottom: 20px !important;
+}
+
+.flex {
+  display: flex !important;
+}
+
+.input {
+  width: 100px !important;
+  margin-right: 20px !important;
+}
+
+form#options div {
+  width: 400px !important;
+}
+
+.form {
+  display: flex;
+  width: 100% !important;
+}
+
+.form div {
+  width: 50px !important;
+  margin-right: 20px !important;
+}
