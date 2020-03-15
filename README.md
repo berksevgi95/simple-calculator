@@ -20,3 +20,23 @@ Here is the list of dependencies & libraries used in this.project:
 * emotion-theming@10.0.27
 
 Detailed explanation is in the project document.
+
+## How to Use
+
+In order to use application, both server and client side servers should be running. 
+
+To start client side:
+
+```
+cd client
+chmod +x ./startup.sh
+./startup.sh
+```
+
+To start server side:
+
+```
+cd server
+chmod +x ./startup.sh
+./startup.sh
+```
