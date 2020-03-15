@@ -20,6 +20,14 @@ import org.json.JSONObject;
 import model.Config;
 import tracker.SignalTracker;
 
+/*
+ * ConfigExecuter class is used for monitoring, reading and writing 
+ * configuration file  * of the application. It simply generates a 
+ * WatchService to be watched * on configuration file location. 
+ * That service keeps watching config.json  * and fires a "kill -HUP <PID>" 
+ * command if anything is changed 
+ * 
+ * */
 public class ConfigExecuter extends Thread {
 	
 	private Config config;
@@ -32,6 +40,9 @@ public class ConfigExecuter extends Thread {
 				try {
 					WatchService watcher = FileSystems.getDefault().newWatchService();
 
+					/*
+					 * WatchService tracks the folder where the config.json is located
+					 * */
 					Path logDir = Paths.get(new File(".").getAbsolutePath());
 					logDir.register(watcher, StandardWatchEventKinds.ENTRY_MODIFY);
 
@@ -39,6 +50,10 @@ public class ConfigExecuter extends Thread {
 						WatchKey key = watcher.take();
 						WatchEvent.Kind<?> kind = key.pollEvents().get(0).kind();
 
+						/*
+						 * If anything is changed in folder, then fires a SIGHUP with using
+						 * SignalTracker's static PID method
+						 * */
 						if (StandardWatchEventKinds.ENTRY_MODIFY.equals(kind)) {
 							System.out.println("Config has been changed");
 							Runtime.getRuntime().exec("kill -HUP " + SignalTracker.getPid());
@@ -55,6 +70,9 @@ public class ConfigExecuter extends Thread {
 		serverThread.start();
 	}
 	
+	/*
+	 * It reads configurations from config.json
+	 * */
 	public Config read() throws JSONException, IOException {
 		BufferedReader infile = new BufferedReader(
 			new InputStreamReader(
@@ -73,6 +91,9 @@ public class ConfigExecuter extends Thread {
 		return config;
 	}
 	
+	/*
+	 * It writes new configurations to config.json
+	 * */
 	public void write(Config newConfig) throws IOException {
 		JSONObject config = new JSONObject();
         config.put("port", newConfig.getPort());
